@@ -1,0 +1,434 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dreamy Music Store</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
+    :root {
+      --cream: #F9EFDD;
+      --brown: #624334;
+      --wood: #956B50;
+      --gold: #D8B47D;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 35%, #C8A783, transparent 65%),
+        linear-gradient(160deg, #AE8C75, #594638);
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .scene {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      padding: 35px 16px;
+      transition: background 1.2s;
+    }
+
+    .heading {
+      text-align: center;
+      z-index: 2;
+      transition: opacity .6s;
+    }
+
+    .heading h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 6vw, 56px);
+      font-weight: 400;
+      letter-spacing: 2px;
+      margin: 0;
+    }
+
+    .heading p {
+      margin-top: 12px;
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      opacity: .8;
+    }
+
+    .shop {
+      position: relative;
+      width: min(310px, 75vw);
+      height: min(455px, 57vh);
+      min-height: 290px;
+      perspective: 1100px;
+    }
+
+    .door-frame {
+      position: absolute;
+      inset: 0;
+      border: 12px solid #50382D;
+      border-bottom: 0;
+      border-radius: 155px 155px 0 0;
+      background:
+        radial-gradient(circle at 50% 55%, #F2C88D, #9E7156 65%, #4B342A);
+      box-shadow:
+        0 0 0 5px #BD9570,
+        0 0 0 9px #463127,
+        0 24px 50px #24180F77,
+        inset 0 0 45px #35241D;
+      overflow: hidden;
+    }
+
+    /* The magical interior behind the door */
+    .inside {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      background:
+        radial-gradient(circle, #F5D8A6 0%, #BA8A67 50%, #493328 100%);
+    }
+
+    .inside span {
+      font-size: 57px;
+      filter: drop-shadow(0 0 15px #FFE2A5);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .inside p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 19px;
+      color: #FFF0D9;
+    }
+
+    /* The clickable wooden door */
+    .door {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 145px 145px 0 0;
+      cursor: pointer;
+      color: #F7E8D3;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          transparent 0px,
+          #42291C20 3px,
+          transparent 7px,
+          #FFFFFF08 24px
+        ),
+        linear-gradient(100deg, #79513A, #A87A56 48%, #67432F);
+      box-shadow:
+        inset 5px 0 13px #D9AB7A55,
+        inset -8px 0 17px #2E1C1680;
+      transform-origin: left center;
+      transition: transform 1.9s cubic-bezier(.3,.15,.2,1);
+      z-index: 2;
+      font: inherit;
+    }
+
+    .door:hover:not(:disabled) {
+      filter: brightness(1.12);
+    }
+
+    .door:focus-visible {
+      outline: 4px solid #FFE4AE;
+      outline-offset: 5px;
+    }
+
+    .door-panel {
+      position: absolute;
+      inset: 29px 20px 26px;
+      border: 3px double #D4A47788;
+      border-radius: 125px 125px 5px 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      box-shadow: inset 0 0 0 8px #4B302527;
+    }
+
+    .window {
+      width: 71%;
+      height: 36%;
+      border: 7px solid #62422E;
+      border-radius: 95px 95px 8px 8px;
+      background:
+        radial-gradient(circle at 50% 75%, #FFE3AC, #B18A73 75%);
+      box-shadow: inset 0 0 22px #6C4C48;
+      display: grid;
+      place-items: center;
+    }
+
+    .window span {
+      font-size: 35px;
+      color: #79513A;
+    }
+
+    .sign {
+      background: #E8D2AD;
+      color: #684A36;
+      padding: 12px 15px;
+      border: 2px solid #B99466;
+      border-radius: 3px;
+      box-shadow: 2px 5px 0 #3D291E55;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      line-height: 1.4;
+      transform: rotate(-2deg);
+    }
+
+    .sign small {
+      display: block;
+      font: 9px 'DM Sans', sans-serif;
+      letter-spacing: 2px;
+      margin-top: 5px;
+      text-transform: uppercase;
+    }
+
+    .handle {
+      position: absolute;
+      right: 17px;
+      top: 63%;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #FFF0B5, #AA783D);
+      box-shadow: 0 0 0 4px #60422D, 1px 3px 5px #241A15;
+    }
+
+    .hint {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      letter-spacing: 1px;
+      font-size: 16px;
+      animation: breathe 2.6s ease-in-out infinite;
+      transition: opacity .5s;
+    }
+
+    .welcome {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at center, #947154, #403027);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1.3s, visibility 1.3s;
+    }
+
+    .welcome .star {
+      font-size: 44px;
+      color: #E9C995;
+      margin-bottom: 18px;
+    }
+
+    .welcome h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: clamp(35px, 6vw, 60px);
+      margin: 0 0 22px;
+    }
+
+    .welcome p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(16px, 3vw, 21px);
+      line-height: 1.9;
+      max-width: 480px;
+      color: #F3DEC2;
+    }
+
+    .welcome .little-note {
+      margin-top: 30px;
+      font: 11px 'DM Sans', sans-serif;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: .7;
+    }
+
+    /* Entering animation */
+    .scene.opening .door {
+      transform: rotateY(-110deg);
+      pointer-events: none;
+    }
+
+    .scene.opening .hint,
+    .scene.opening .heading {
+      opacity: 0;
+    }
+
+    .scene.entered .welcome {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-9px); }
+    }
+
+    @keyframes breathe {
+      0%, 100% { opacity: .55; }
+      50% { opacity: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="scene" id="scene">
+
+    <header class="heading">
+      <h1>Dreamy Music Store</h1>
+      <p>A little shop of melodies & memories</p>
+    </header>
+
+    <div class="shop">
+      <div class="door-frame">
+
+        <div class="inside" aria-hidden="true">
+          <span>✧</span>
+          <p>A little magic awaits...</p>
+        </div>
+
+        <button class="door" id="door"
+                aria-label="Open the music store">
+          <div class="door-panel">
+            <div class="window">
+              <span>♫</span>
+            </div>
+            <div class="sign">
+              Dreamy<br>Music Store
+              <small>Est. in a daydream</small>
+            </div>
+          </div>
+          <div class="handle"></div>
+        </button>
+
+      </div>
+    </div>
+
+    <div class="hint">✧ Click the door to enter ✧</div>
+
+    <section class="welcome" id="welcome"
+             aria-hidden="true">
+      <div class="star">✧ ♫ ✧</div>
+      <h2>Welcome, wanderer.</h2>
+      <p>
+        You've found Dreamy Music Store.<br>
+        A little place where every melody<br>
+        holds a memory.<br><br>
+        Come in, your story is waiting.
+      </p>
+      <div class="little-note">Made of music & daydreams</div>
+    </section>
+
+  </main>
+
+  <script>
+    const scene = document.getElementById("scene");
+    const door = document.getElementById("door");
+    const welcome = document.getElementById("welcome");
+
+    // A soft, synthesized shop-bell sound.
+    // No external audio files needed.
+    function playBell() {
+      const AudioContextClass =
+        window.AudioContext || window.webkitAudioContext;
+
+      if (!AudioContextClass) return;
+
+      try {
+        const audio = new AudioContextClass();
+        if (audio.state === "suspended") audio.resume();
+
+        function chime(frequency, delay) {
+          const start = audio.currentTime + delay;
+          const notes = [
+            { multiplier: 1, volume: 0.13 },
+            { multiplier: 2.01, volume: 0.045 },
+            { multiplier: 3.9, volume: 0.014 }
+          ];
+
+          notes.forEach(note => {
+            const osc = audio.createOscillator();
+            const gain = audio.createGain();
+
+            osc.type = "sine";
+            osc.frequency.value = frequency * note.multiplier;
+
+            gain.gain.setValueAtTime(0.0001, start);
+            gain.gain.exponentialRampToValueAtTime(
+              note.volume, start + 0.012
+            );
+            gain.gain.exponentialRampToValueAtTime(
+              0.0001, start + 2.3
+            );
+
+            osc.connect(gain);
+            gain.connect(audio.destination);
+
+            osc.start(start);
+            osc.stop(start + 2.4);
+          });
+        }
+
+        chime(880, 0);
+        chime(1174.66, 0.18);
+
+        setTimeout(() => audio.close(), 3500);
+      } catch (error) {
+        console.log("Audio unavailable:", error);
+      }
+    }
+
+    door.addEventListener("click", () => {
+      if (scene.classList.contains("opening")) return;
+
+      door.disabled = true;
+      playBell();
+
+      scene.classList.add("opening");
+
+      setTimeout(() => {
+        welcome.setAttribute("aria-hidden", "false");
+        scene.classList.add("entered");
+      }, 1700);
+    });
+  </script>
+</body>
+</html>
