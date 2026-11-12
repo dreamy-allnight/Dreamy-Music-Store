@@ -1,0 +1,671 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Little Note | Dreamy Music Store</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --paper: #F5E8CE;
+  --ink: #644735;
+  --gold: #C9A575;
+  --wood: #77523F;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+  color: var(--ink);
+  background: #715541;
+}
+
+/* VINTAGE RECORD STORE */
+
+.store {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 20%,
+      #E3BA88 0%, transparent 55%),
+    linear-gradient(145deg, #AC8868, #604737);
+}
+
+.store::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #39271D66;
+  z-index: 5;
+}
+
+.back-wall {
+  position: absolute;
+  inset: 0 0 23%;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #9D785B 0 45px,
+      #957056 45px 48px
+    );
+}
+
+.floor {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 24%;
+  background:
+    repeating-linear-gradient(
+      100deg,
+      #79513C 0 65px,
+      #8A6147 65px 69px
+    );
+}
+
+.shelf {
+  position: absolute;
+  top: 12%;
+  height: 62%;
+  width: 29%;
+  border: 18px solid #503527;
+  background:
+    repeating-linear-gradient(
+      180deg,
+      #B28A66 0 23%,
+      #563B2D 23% 26%
+    );
+  box-shadow: 5px 16px 35px #29190F66;
+}
+
+.shelf.left { left: 4%; }
+.shelf.right { right: 4%; }
+
+.vinyls {
+  position: absolute;
+  inset: 12px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #48362F 0 7px,
+      #BB8865 7px 10px,
+      #292522 10px 16px,
+      #C5A071 16px 19px,
+      #6D5948 19px 25px
+    );
+  opacity: .8;
+}
+
+.shelf::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      transparent 21%, #563B2D 21% 27%,
+      transparent 27% 47%, #563B2D 47% 53%,
+      transparent 53% 73%, #563B2D 73% 79%,
+      transparent 79%
+    );
+}
+
+.counter {
+  position: absolute;
+  left: 50%;
+  bottom: 13%;
+  transform: translateX(-50%);
+  width: 36%;
+  height: 22%;
+  border-top: 14px solid #523629;
+  border-radius: 8px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #886148 0 35px,
+      #79543F 35px 39px
+    );
+}
+
+.lamp {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 7px;
+  height: 20%;
+  background: #4D372B;
+}
+
+.lamp::after {
+  content: "";
+  position: absolute;
+  bottom: -25px;
+  left: -58px;
+  width: 125px;
+  height: 65px;
+  border-radius: 0 0 65px 65px;
+  background: #E7C491;
+  box-shadow: 0 0 90px 45px #FFDCA066;
+}
+
+.plant {
+  position: absolute;
+  bottom: 13%;
+  right: 32%;
+  width: 45px;
+  height: 65px;
+  background: #AE7858;
+  border-radius: 8px 8px 15px 15px;
+}
+
+.plant::before {
+  content: "✿";
+  position: absolute;
+  bottom: 35px;
+  left: -35px;
+  font-size: 105px;
+  color: #6E8661;
+}
+
+.blur-layer {
+  position: absolute;
+  inset: -20px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(57,39,29,.15);
+  z-index: 6;
+}
+
+/* MAIN GUIDE */
+
+.guide-layout {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 18px;
+}
+
+.paper {
+  position: relative;
+  width: min(750px, 100%);
+  min-height: 530px;
+  padding: 50px 65px 35px;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at 12% 10%,
+      #FFF7E8, transparent 40%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 4px,
+      #8A654007 4px 5px
+    ),
+    linear-gradient(145deg, #FAEED8, #E8D4B3);
+  border: 2px solid #CFB18B;
+  border-radius: 5px;
+  box-shadow:
+    0 0 0 7px #F4E4C599,
+    0 25px 90px #1D120DBB;
+  animation: appear 1s ease both;
+}
+
+.paper::before {
+  content: "";
+  position: absolute;
+  inset: 15px;
+  border: 1px solid #BFA17A80;
+  pointer-events: none;
+}
+
+.corner {
+  position: absolute;
+  font-size: 24px;
+  color: #B99A70;
+}
+
+.corner.tl { top: 18px; left: 24px; }
+.corner.tr { top: 18px; right: 24px; }
+.corner.bl { bottom: 18px; left: 24px; }
+.corner.br { bottom: 18px; right: 24px; }
+
+.shop-label {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  color: #967657;
+  text-transform: uppercase;
+}
+
+.ornament {
+  text-align: center;
+  color: #B08B63;
+  font-size: 25px;
+  margin: 12px 0;
+}
+
+h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 500;
+  line-height: 1.1;
+  text-align: center;
+  margin: 8px 0 20px;
+}
+
+.message {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(23px, 2.7vw, 29px);
+  font-style: italic;
+  line-height: 1.55;
+  text-align: center;
+  white-space: pre-line;
+  max-width: 560px;
+  min-height: 170px;
+  margin: 0 auto;
+}
+
+.cursor {
+  display: inline;
+  color: #B58D63;
+  animation: blink .8s step-end infinite;
+}
+
+.progress {
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+  margin: 18px 0;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #CDB99B;
+  transition: all .35s;
+}
+
+.dot.active {
+  background: #876347;
+  width: 23px;
+  border-radius: 10px;
+}
+
+.controls {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+button {
+  font-family: "DM Sans", sans-serif;
+  cursor: pointer;
+}
+
+.nav-btn {
+  border: 1px solid #AD8C66;
+  padding: 12px 22px;
+  background: transparent;
+  border-radius: 4px;
+  color: #74543E;
+  font-size: 12px;
+  letter-spacing: 1px;
+  transition: .25s;
+}
+
+.nav-btn:hover:not(:disabled) {
+  background: #E7D1AD;
+}
+
+.nav-btn.primary {
+  background: #75523C;
+  color: #FFF0D6;
+}
+
+.nav-btn.primary:hover:not(:disabled) {
+  background: #967252;
+}
+
+button:disabled {
+  opacity: .3;
+  cursor: default;
+}
+
+.page-number {
+  font: italic 20px "Cormorant Garamond", serif;
+  color: #9A785A;
+}
+
+.footer {
+  margin-top: 28px;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #A5896D;
+}
+
+/* FINAL SCREEN */
+
+.finish {
+  display: none;
+  text-align: center;
+  margin: auto;
+  animation: appear .8s ease both;
+}
+
+.finish.visible {
+  display: block;
+}
+
+.finish h2 {
+  font: 500 clamp(42px, 6vw, 65px)
+    "Cormorant Garamond", serif;
+  margin: 15px 0;
+}
+
+.finish p {
+  font: italic 26px/1.5
+    "Cormorant Garamond", serif;
+}
+
+.finish button {
+  margin-top: 25px;
+  border: 1px solid #A8865E;
+  background: #75523C;
+  color: #FFF0D6;
+  padding: 15px 28px;
+  border-radius: 5px;
+  letter-spacing: 1px;
+}
+
+.finish button:hover {
+  background: #977052;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .paper {
+    padding: 45px 25px 28px;
+    min-height: 520px;
+  }
+
+  .message { min-height: 230px; }
+
+  .nav-btn { padding: 11px 13px; }
+
+  .shop-label { font-size: 9px; }
+
+  .corner { font-size: 17px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Blurred music shop background -->
+<div class="store" aria-hidden="true">
+  <div class="back-wall"></div>
+  <div class="lamp"></div>
+
+  <div class="shelf left">
+    <div class="vinyls"></div>
+  </div>
+
+  <div class="shelf right">
+    <div class="vinyls"></div>
+  </div>
+
+  <div class="counter"></div>
+  <div class="plant"></div>
+  <div class="floor"></div>
+  <div class="blur-layer"></div>
+</div>
+
+<main class="guide-layout">
+
+  <section class="paper" aria-label="Shopkeeper guide">
+
+    <span class="corner tl">❧</span>
+    <span class="corner tr">❧</span>
+    <span class="corner bl">❧</span>
+    <span class="corner br">❧</span>
+
+    <div id="dialogue">
+      <div class="shop-label">
+        Dreamy Music Store
+      </div>
+
+      <div class="ornament">✧ ♫ ✧</div>
+
+      <h1 id="title"></h1>
+
+      <p class="message">
+        <span id="message"></span><span
+        class="cursor" id="cursor">|</span>
+      </p>
+
+      <div class="progress" id="progress"></div>
+
+      <div class="controls">
+
+        <button class="nav-btn" id="back">
+          ← Back
+        </button>
+
+        <span class="page-number" id="pageNumber"></span>
+
+        <button class="nav-btn primary" id="next">
+          Next →
+        </button>
+
+      </div>
+
+      <div class="footer">
+        A little guide to your musical journey
+      </div>
+    </div>
+
+    <div class="finish" id="finish">
+      <div class="ornament">✧ ♫ ✧</div>
+
+      <h2>You're all set, wanderer!</h2>
+
+      <p>
+        The melodies are waiting.<br>
+        Shall we begin your little journey?
+      </p>
+
+      <button id="begin">
+        ✧ Let's Find My Melody ✧
+      </button>
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+const pages = [
+  {
+    title: "Welcome, dear wanderer!",
+    text:
+      "Here at Dreamy Music Store, we believe every feeling deserves its own melody.\n\nBefore we begin, allow me to show you how our little shop works."
+  },
+  {
+    title: "01. Choose Your Feelings",
+    text:
+      "Take a look at our collection of emotion cards.\n\nPick the feelings you'd like your music to capture, whether it's dreamy, nostalgic, peaceful, or perhaps a little magical."
+  },
+  {
+    title: "02. Fill Your Music Box",
+    text:
+      "Place your chosen cards into our little wooden box.\n\nThen, tell us how many melodies you'd like to discover. You may choose up to five."
+  },
+  {
+    title: "03. Unwrap Your Melodies",
+    text:
+      "Once your order is ready, you'll receive a collection of mystery music cards.\n\nTurn each one over to discover a song chosen to match your feelings."
+  },
+  {
+    title: "04. Take a Memory Home",
+    text:
+      "Found a few melodies that speak to your heart?\n\nGather them into your very own playlist, a little souvenir from your visit."
+  }
+];
+
+const title = document.getElementById("title");
+const message = document.getElementById("message");
+const cursor = document.getElementById("cursor");
+const progress = document.getElementById("progress");
+const pageNumber = document.getElementById("pageNumber");
+const back = document.getElementById("back");
+const next = document.getElementById("next");
+const dialogue = document.getElementById("dialogue");
+const finish = document.getElementById("finish");
+const begin = document.getElementById("begin");
+
+let currentPage = 0;
+let typingTimer = null;
+let typing = false;
+
+const reducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+
+function renderProgress() {
+  progress.innerHTML = "";
+
+  pages.forEach((_, i) => {
+    const dot = document.createElement("span");
+    dot.className = "dot";
+
+    if (i === currentPage) {
+      dot.classList.add("active");
+    }
+
+    progress.appendChild(dot);
+  });
+}
+
+function showPage() {
+  clearInterval(typingTimer);
+
+  const page = pages[currentPage];
+
+  title.textContent = page.title;
+  message.textContent = "";
+  cursor.style.display = "inline";
+
+  pageNumber.textContent =
+    `${currentPage + 1} / ${pages.length}`;
+
+  back.disabled = currentPage === 0;
+  next.textContent =
+    currentPage === pages.length - 1
+      ? "Finish ✧"
+      : "Next →";
+
+  renderProgress();
+
+  if (reducedMotion) {
+    message.textContent = page.text;
+    cursor.style.display = "none";
+    typing = false;
+    return;
+  }
+
+  typing = true;
+  let index = 0;
+
+  typingTimer = setInterval(() => {
+    message.textContent += page.text.charAt(index);
+    index++;
+
+    if (index >= page.text.length) {
+      clearInterval(typingTimer);
+      typing = false;
+      cursor.style.display = "none";
+    }
+  }, 20);
+}
+
+function completeTyping() {
+  clearInterval(typingTimer);
+  typing = false;
+
+  message.textContent = pages[currentPage].text;
+  cursor.style.display = "none";
+}
+
+next.addEventListener("click", () => {
+  if (typing) {
+    completeTyping();
+    return;
+  }
+
+  if (currentPage < pages.length - 1) {
+    currentPage++;
+    showPage();
+  } else {
+    dialogue.style.display = "none";
+    finish.classList.add("visible");
+  }
+});
+
+back.addEventListener("click", () => {
+  if (currentPage > 0) {
+    currentPage--;
+    showPage();
+  }
+});
+
+begin.addEventListener("click", () => {
+  // Placeholder for Part 3.
+  // We'll connect this button to moods.html
+  // once the emotion-card page is ready.
+  begin.textContent = "The next chapter is coming soon ✧";
+  begin.disabled = true;
+});
+
+showPage();
+</script>
+
+</body>
+</html>
