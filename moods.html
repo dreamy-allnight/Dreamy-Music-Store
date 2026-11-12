@@ -1,0 +1,753 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Feeling Collection | Dreamy Music Store</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cream: #FAF0DE;
+  --paper: #F7EAD4;
+  --ink: #624838;
+  --wood: #79533C;
+  --gold: #C9A779;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "DM Sans", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at 50% 10%, #E9D4B4, transparent 65%),
+    repeating-linear-gradient(
+      90deg,
+      #FFFFFF08 0 3px,
+      #64462E05 3px 6px
+    ),
+    #B79A7E;
+}
+
+/* FLOATING DECORATIONS */
+
+.decoration {
+  position: fixed;
+  color: #F8E6C9;
+  opacity: .32;
+  font-size: 28px;
+  pointer-events: none;
+  animation: float 7s ease-in-out infinite;
+}
+
+.d1 { top: 12%; left: 6%; }
+.d2 { top: 28%; right: 7%; animation-delay: -2s; }
+.d3 { bottom: 10%; left: 8%; animation-delay: -4s; }
+
+/* MAIN LAYOUT */
+
+.container {
+  position: relative;
+  max-width: 1220px;
+  margin: auto;
+  padding: 55px 24px 85px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #765746;
+}
+
+h1 {
+  margin: 12px 0;
+  font: 500 clamp(49px, 7vw, 82px)
+    "Cormorant Garamond", serif;
+  line-height: 1;
+  color: #FFF5E6;
+  text-shadow: 0 3px 15px #50352333;
+}
+
+.subtitle {
+  font: italic 26px "Cormorant Garamond", serif;
+  color: #644637;
+  margin: 20px 0 10px;
+}
+
+.instructions {
+  font-size: 12px;
+  letter-spacing: .5px;
+  color: #6F5444;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin: 25px auto;
+  color: #EAD8BC;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  width: 90px;
+  height: 1px;
+  background: #EAD8BC;
+}
+
+/* FEELING CARDS */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.card {
+  position: relative;
+  min-height: 228px;
+  padding: 20px 12px;
+  border: 2px solid #FFFFFF88;
+  border-radius: 9px;
+  background: var(--card-color);
+  color: #614B42;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 10px 22px #513C3030;
+  transition:
+    transform .3s,
+    box-shadow .3s,
+    border-color .3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border: 1px solid #FFFFFF99;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.card::after {
+  content: "✧";
+  position: absolute;
+  top: 13px;
+  right: 17px;
+  font-size: 17px;
+  color: #9B806F;
+}
+
+.card:hover {
+  transform: translateY(-7px) rotate(-1deg);
+  box-shadow: 0 17px 30px #4D342D40;
+}
+
+.card.selected {
+  transform: translateY(-6px);
+  border-color: #836445;
+  box-shadow:
+    0 0 0 3px #F9E9C6,
+    0 15px 30px #4D342D50;
+}
+
+.card.selected::after {
+  content: "✓";
+  font-family: "DM Sans", sans-serif;
+  font-weight: bold;
+}
+
+.card-icon {
+  font-size: 39px;
+  margin-bottom: 13px;
+  filter: saturate(.72);
+}
+
+.card-name {
+  font: 600 clamp(26px, 2.8vw, 34px)
+    "Cormorant Garamond", serif;
+  line-height: 1.05;
+}
+
+.card-description {
+  margin-top: 13px;
+  font: italic 18px
+    "Cormorant Garamond", serif;
+  opacity: .76;
+}
+
+.card-status {
+  margin-top: 15px;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  opacity: .7;
+}
+
+/* WOODEN MUSIC BOX */
+
+.music-section {
+  margin-top: 65px;
+  display: flex;
+  justify-content: center;
+}
+
+.music-box {
+  width: min(650px, 100%);
+  position: relative;
+  padding: 32px 30px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #FFFFFF06 0 5px,
+      #00000005 5px 11px
+    ),
+    linear-gradient(135deg, #A47A58, #6D4B37);
+  border: 10px solid #553927;
+  border-radius: 17px;
+  color: #F9EBD5;
+  box-shadow:
+    0 15px 40px #3B281E66,
+    inset 0 0 25px #3E261B55;
+  text-align: center;
+}
+
+.music-box::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid #DFBC8A88;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.music-box h2 {
+  font: 500 40px "Cormorant Garamond", serif;
+  margin: 8px 0;
+}
+
+.box-icon {
+  font-size: 33px;
+  color: #F0D5A9;
+}
+
+.box-instruction {
+  font: italic 21px
+    "Cormorant Garamond", serif;
+  margin: 10px 0 22px;
+  color: #EEDAC0;
+}
+
+.selected-area {
+  min-height: 120px;
+  border: 1px dashed #E9C99C88;
+  border-radius: 7px;
+  padding: 16px;
+  background: #442E2370;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.empty {
+  font: italic 21px
+    "Cormorant Garamond", serif;
+  color: #E4CEB6AA;
+}
+
+.selected-tag {
+  border: 1px solid #E8CEAD;
+  border-radius: 5px;
+  padding: 9px 13px;
+  background: #F5E6CD;
+  color: #674836;
+  font: 600 17px
+    "Cormorant Garamond", serif;
+  cursor: pointer;
+  animation: tagAppear .3s ease;
+}
+
+.selected-tag:hover {
+  background: #EAD2AE;
+}
+
+.box-counter {
+  margin: 20px 0 0;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.box-note {
+  font: italic 17px
+    "Cormorant Garamond", serif;
+  opacity: .75;
+}
+
+/* BUTTONS */
+
+.actions {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 13px;
+}
+
+.btn {
+  border: 1px solid #D8B98F;
+  border-radius: 5px;
+  padding: 15px 25px;
+  cursor: pointer;
+  font: 500 12px "DM Sans", sans-serif;
+  letter-spacing: 1px;
+  transition: .25s;
+}
+
+.btn.clear {
+  background: transparent;
+  color: #F7E5CA;
+}
+
+.btn.continue {
+  background: #F4E3C5;
+  color: #60412D;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  filter: brightness(1.06);
+}
+
+.btn:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+#notice {
+  min-height: 28px;
+  margin-top: 20px;
+  font: italic 20px "Cormorant Garamond", serif;
+  color: #FFF1D9;
+  text-align: center;
+}
+
+/* ANIMATIONS */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes tagAppear {
+  from {
+    opacity: 0;
+    transform: scale(.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 650px) {
+  .container {
+    padding: 38px 16px 65px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .card {
+    min-height: 195px;
+    padding: 12px 6px;
+  }
+
+  .card-icon { font-size: 30px; }
+
+  .card-name {
+    font-size: 27px;
+    overflow-wrap: anywhere;
+  }
+
+  .card-description { font-size: 16px; }
+
+  .music-box { padding: 25px 15px; }
+
+  .subtitle { font-size: 23px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="decoration d1" aria-hidden="true">✧</div>
+<div class="decoration d2" aria-hidden="true">♫</div>
+<div class="decoration d3" aria-hidden="true">✦</div>
+
+<main class="container">
+
+  <header>
+    <div class="eyebrow">
+      Dreamy Music Store · Chapter Three
+    </div>
+
+    <h1>The Feeling Collection</h1>
+
+    <p class="subtitle">
+      Tell us, what does your heart wish to hear?
+    </p>
+
+    <p class="instructions">
+      ✧ Choose as many feeling cards as you like.
+      There are no limits here. ✧
+    </p>
+
+    <div class="divider">❀</div>
+  </header>
+
+  <!-- Emotion cards generated by JavaScript -->
+  <section
+    class="cards"
+    id="cards"
+    aria-label="Choose your feelings">
+  </section>
+
+  <!-- Wooden box -->
+  <section class="music-section">
+    <div class="music-box">
+
+      <div class="box-icon">✧ ♫ ✧</div>
+
+      <h2>Your Little Music Box</h2>
+
+      <p class="box-instruction">
+        A collection of feelings,
+        waiting to become melodies.
+      </p>
+
+      <div class="selected-area"
+           id="selectedArea"
+           aria-live="polite">
+
+        <span class="empty">
+          Your box is waiting for its first feeling...
+        </span>
+
+      </div>
+
+      <div class="box-counter" id="counter">
+        0 feelings collected
+      </div>
+
+      <p class="box-note">
+        Tap a card again to return it to the shelf.
+      </p>
+
+    </div>
+  </section>
+
+  <div class="actions">
+    <button class="btn clear" id="clearButton">
+      Clear My Box
+    </button>
+
+    <button class="btn continue"
+            id="continueButton" disabled>
+      Continue My Journey ✧
+    </button>
+  </div>
+
+  <p id="notice" role="status"></p>
+
+</main>
+
+<script>
+// THE FEELING COLLECTION
+
+const feelings = [
+  {
+    name: "Dreamy",
+    icon: "☁️",
+    description: "Lost in a daydream",
+    color: "#E8DDF0"
+  },
+  {
+    name: "Nostalgia",
+    icon: "🕰️",
+    description: "Echoes of yesterday",
+    color: "#EBD9BD"
+  },
+  {
+    name: "Romantic",
+    icon: "🌹",
+    description: "A gentle love story",
+    color: "#F1D9DD"
+  },
+  {
+    name: "Relax",
+    icon: "🍵",
+    description: "A quiet little escape",
+    color: "#DEE8DB"
+  },
+  {
+    name: "Happiness",
+    icon: "🌼",
+    description: "Sunshine in every note",
+    color: "#F4E8B9"
+  },
+  {
+    name: "Soft",
+    icon: "🪽",
+    description: "As light as a whisper",
+    color: "#EAE2E5"
+  },
+  {
+    name: "Instrumental",
+    icon: "🎹",
+    description: "Stories without words",
+    color: "#DCDCE9"
+  },
+  {
+    name: "Classical",
+    icon: "🎻",
+    description: "Timeless harmonies",
+    color: "#E5D5C5"
+  },
+  {
+    name: "Sad",
+    icon: "🌧️",
+    description: "A tender rainy day",
+    color: "#D7DFEA"
+  },
+  {
+    name: "Low Cortisol",
+    icon: "🕊️",
+    description: "Slow, soothing sounds",
+    color: "#DCEBE5"
+  },
+  {
+    name: "Background",
+    icon: "📖",
+    description: "A soundtrack for little moments",
+    color: "#E8DFD1"
+  }
+];
+
+const cardsContainer = document.getElementById("cards");
+const selectedArea = document.getElementById("selectedArea");
+const counter = document.getElementById("counter");
+const clearButton = document.getElementById("clearButton");
+const continueButton =
+  document.getElementById("continueButton");
+const notice = document.getElementById("notice");
+
+// Recover previous selections if user returns.
+let selected = [];
+
+try {
+  const saved = JSON.parse(
+    localStorage.getItem("dreamySelectedFeelings") || "[]"
+  );
+
+  if (Array.isArray(saved)) {
+    selected = saved.filter(name =>
+      feelings.some(feeling => feeling.name === name)
+    );
+
+    selected = [...new Set(selected)];
+  }
+} catch (error) {
+  selected = [];
+}
+
+// Save choices for the next chapter.
+function saveSelections() {
+  try {
+    localStorage.setItem(
+      "dreamySelectedFeelings",
+      JSON.stringify(selected)
+    );
+  } catch (error) {
+    console.log("Local storage unavailable");
+  }
+}
+
+// Render all mood cards.
+function renderCards() {
+  cardsContainer.innerHTML = "";
+
+  feelings.forEach(feeling => {
+    const card = document.createElement("button");
+
+    card.type = "button";
+    card.className = "card";
+    card.style.setProperty(
+      "--card-color", feeling.color
+    );
+
+    const isSelected =
+      selected.includes(feeling.name);
+
+    if (isSelected) {
+      card.classList.add("selected");
+    }
+
+    card.setAttribute("aria-pressed", isSelected);
+
+    const icon = document.createElement("span");
+    icon.className = "card-icon";
+    icon.textContent = feeling.icon;
+
+    const name = document.createElement("span");
+    name.className = "card-name";
+    name.textContent = feeling.name;
+
+    const description = document.createElement("span");
+    description.className = "card-description";
+    description.textContent = feeling.description;
+
+    const status = document.createElement("span");
+    status.className = "card-status";
+    status.textContent = isSelected
+      ? "✧ In your box"
+      : "Click to collect";
+
+    card.append(icon, name, description, status);
+
+    card.addEventListener("click", () => {
+      toggleFeeling(feeling.name);
+    });
+
+    cardsContainer.appendChild(card);
+  });
+}
+
+// Add or remove a feeling.
+function toggleFeeling(name) {
+  if (selected.includes(name)) {
+    selected = selected.filter(item => item !== name);
+  } else {
+    selected.push(name);
+  }
+
+  notice.textContent = "";
+  saveSelections();
+  renderCards();
+  renderBox();
+}
+
+// Render the wooden music box contents.
+function renderBox() {
+  selectedArea.innerHTML = "";
+
+  if (selected.length === 0) {
+    const empty = document.createElement("span");
+    empty.className = "empty";
+    empty.textContent =
+      "Your box is waiting for its first feeling...";
+
+    selectedArea.appendChild(empty);
+  } else {
+    selected.forEach(name => {
+      const feeling = feelings.find(
+        item => item.name === name
+      );
+
+      if (!feeling) return;
+
+      const tag = document.createElement("button");
+      tag.type = "button";
+      tag.className = "selected-tag";
+      tag.textContent = `${feeling.icon} ${name} ×`;
+      tag.setAttribute(
+        "aria-label", `Remove ${name} from the box`
+      );
+
+      tag.addEventListener("click", () => {
+        toggleFeeling(name);
+      });
+
+      selectedArea.appendChild(tag);
+    });
+  }
+
+  counter.textContent =
+    `${selected.length} ${
+      selected.length === 1 ? "feeling" : "feelings"
+    } collected`;
+
+  clearButton.disabled = selected.length === 0;
+  continueButton.disabled = selected.length === 0;
+}
+
+// Empty the entire box.
+clearButton.addEventListener("click", () => {
+  selected = [];
+  notice.textContent = "";
+  saveSelections();
+  renderCards();
+  renderBox();
+});
+
+// Save and prepare for the next stage.
+continueButton.addEventListener("click", () => {
+  if (selected.length === 0) return;
+
+  saveSelections();
+
+  // Temporary message until music-box.html exists.
+  notice.textContent =
+    "Your feelings have been carefully tucked away. " +
+    "The next chapter awaits... ✧";
+
+  // When Part 4 is ready, replace the message with:
+  // window.location.href = "music-box.html";
+});
+
+// Start the collection.
+renderCards();
+renderBox();
+</script>
+
+</body>
+</html>
