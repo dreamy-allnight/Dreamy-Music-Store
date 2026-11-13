@@ -965,9 +965,12 @@ keepSongs.addEventListener("click", () => {
     JSON.stringify(currentSongs.map(song => song.id))
   );
 
-  note.textContent = saved
-    ? "Your melodies have been saved for your playlist. ♡"
-    : "Your browser could not save this collection.";
+  if (saved) {
+    window.location.href = "playlist.html";
+  } else {
+    note.textContent =
+      "Your browser could not save this collection.";
+  }
 });
 
 // Initialize.
