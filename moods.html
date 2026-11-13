@@ -729,20 +729,14 @@ clearButton.addEventListener("click", () => {
   renderBox();
 });
 
-// Save and prepare for the next stage.
-continueButton.addEventListener("click", () => {
-  if (selected.length === 0) return;
 
-  saveSelections();
+  // Save the selected feelings and go to Chapter Four.
+  continueButton.addEventListener("click", () => {
+    if (selected.length === 0) return;
 
-  // Temporary message until music-box.html exists.
-  notice.textContent =
-    "Your feelings have been carefully tucked away. " +
-    "The next chapter awaits... ✧";
-
-  // When Part 4 is ready, replace the message with:
-  // window.location.href = "music-box.html";
-});
+    saveSelections();
+    window.location.href = "music-box.html";
+  });
 
 // Start the collection.
 renderCards();
