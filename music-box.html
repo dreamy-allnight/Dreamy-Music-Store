@@ -1060,20 +1060,14 @@ editButton.addEventListener("click", () => {
   prepareButton.focus();
 });
 
-// Placeholder for the next chapter.
-nextButton.addEventListener("click", () => {
-  saveTickets();
 
-  // Part 5 will reveal the selected songs.
-  // When it exists, connect it here:
-  // window.location.href = "songs.html";
+  // Take the collected tickets to Chapter Five.
+  nextButton.addEventListener("click", () => {
+    if (moving || collected.length === 0) return;
 
-  nextButton.textContent =
-    "Your next chapter is coming soon ✧";
-
-  nextButton.disabled = true;
-});
-
+    saveTickets();
+    window.location.href = "songs.html";
+  });
 // Initial display.
 renderHangingCards();
 renderBox();
