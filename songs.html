@@ -1,0 +1,979 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Little Melodies | Dreamy Music Store</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cream: #F9EDD9;
+  --paper: #F2E1C3;
+  --brown: #674936;
+  --dark: #443024;
+  --gold: #CDA878;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "DM Sans", sans-serif;
+  color: var(--cream);
+  background:
+    radial-gradient(ellipse at 50% 0%, #D9B89A, transparent 65%),
+    repeating-linear-gradient(
+      90deg, #FFFFFF06 0 3px, #00000004 3px 7px
+    ),
+    linear-gradient(145deg, #B99A80, #896B57);
+}
+
+main {
+  max-width: 1230px;
+  margin: auto;
+  padding: 55px 22px 90px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.chapter {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #614637;
+}
+
+h1 {
+  margin: 14px 0 10px;
+  font: 500 clamp(52px, 8vw, 92px)
+    "Cormorant Garamond", serif;
+  line-height: 1;
+  text-shadow: 0 5px 20px #422C2340;
+}
+
+.subtitle {
+  font: italic 27px "Cormorant Garamond", serif;
+  color: #543B2F;
+}
+
+.ornament {
+  font-size: 27px;
+  color: #F5E4C9;
+  margin: 25px 0;
+}
+
+.order {
+  width: min(750px, 100%);
+  margin: 0 auto 50px;
+  padding: 25px 28px;
+  border: 1px solid #E6CDAA;
+  border-radius: 8px;
+  background: #F7E7CD;
+  color: #674735;
+  text-align: center;
+  box-shadow: 0 12px 30px #40281C30;
+}
+
+.order-title {
+  font: 500 32px "Cormorant Garamond", serif;
+}
+
+.order p {
+  font: italic 20px "Cormorant Garamond", serif;
+}
+
+.mood-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.mood {
+  padding: 7px 13px;
+  border-radius: 20px;
+  border: 1px solid #D4B48E;
+  background: #EBD8B9;
+  color: #76543D;
+  font-size: 11px;
+}
+
+.order-count {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.preview {
+  margin-top: 12px;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #916C50;
+}
+
+/* THE MYSTERY CARDS */
+
+.section-title {
+  text-align: center;
+  font: italic 29px "Cormorant Garamond", serif;
+  margin-bottom: 30px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit, minmax(min(100%, 195px), 1fr)
+  );
+  gap: 23px;
+  justify-content: center;
+}
+
+.song-card {
+  height: 320px;
+  perspective: 1100px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform .8s cubic-bezier(.2,.7,.2,1);
+}
+
+.song-card.opened .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 7px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: 0 16px 30px #41291E50;
+}
+
+.front {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 17px;
+  padding: 24px 15px;
+  border: 2px solid #D5B88C;
+  cursor: pointer;
+  color: #73513C;
+  font-family: inherit;
+  background:
+    radial-gradient(circle at 30% 20%, #FFF7E6, transparent 55%),
+    repeating-linear-gradient(
+      0deg, #FFFFFF05 0 5px, #9A704008 5px 6px
+    ),
+    linear-gradient(145deg, #F8EBD4, #E5CDA8);
+}
+
+.front::before,
+.back::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px solid #BE996E88;
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.front:hover {
+  filter: brightness(1.055);
+}
+
+.front:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #E9C17F;
+  outline-offset: 4px;
+}
+
+.ticket-symbol {
+  font-size: 36px;
+  color: #B18B60;
+}
+
+.ticket-number {
+  font: 500 65px "Cormorant Garamond", serif;
+}
+
+.ticket-label {
+  font: italic 24px "Cormorant Garamond", serif;
+}
+
+.ticket-note {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.7;
+}
+
+.wax-seal {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #A97067;
+  color: #F9E6D1;
+  font-size: 26px;
+  border: 4px double #D9A49A;
+  box-shadow: 2px 4px 7px #51332940;
+}
+
+/* REVEALED SIDE */
+
+.back {
+  transform: rotateY(180deg);
+  background:
+    radial-gradient(circle at 50% 5%, #FFF8E8, transparent 70%),
+    linear-gradient(145deg, #F6E9D2, #E3CAA8);
+  color: #674936;
+  padding: 30px 17px 23px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 13px;
+  border: 2px solid #CFAC83;
+  pointer-events: none;
+}
+
+.song-card.opened .back {
+  pointer-events: auto;
+}
+
+.song-card.opened .front {
+  pointer-events: none;
+}
+
+.back-label {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #A17D5A;
+}
+
+.song-name {
+  margin: 0;
+  font: 600 clamp(23px, 2.8vw, 32px)/1.05
+    "Cormorant Garamond", serif;
+  overflow-wrap: anywhere;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+}
+
+.tag {
+  border: 1px solid #D3B998;
+  background: #E9D8BD;
+  color: #775740;
+  padding: 5px 8px;
+  font-size: 9px;
+  border-radius: 20px;
+}
+
+.listen-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 12px 15px;
+  border-radius: 5px;
+  background: #78543E;
+  color: #FFF0D8;
+  font-size: 11px;
+  text-decoration: none;
+  transition: background .2s;
+}
+
+.listen-link:hover {
+  background: #A07956;
+}
+
+.reveal-status {
+  text-align: center;
+  margin: 30px auto;
+  font: italic 23px "Cormorant Garamond", serif;
+  color: #FFF0DB;
+}
+
+/* ACTIONS */
+
+.actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin-top: 35px;
+}
+
+.action-btn {
+  border: 1px solid #DBC09C;
+  background: #75513B;
+  color: #FFF0DA;
+  border-radius: 5px;
+  padding: 15px 23px;
+  font: 500 12px "DM Sans", sans-serif;
+  letter-spacing: .5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform .2s, background .2s;
+}
+
+.action-btn:hover {
+  transform: translateY(-3px);
+  background: #997151;
+}
+
+.action-btn.light {
+  background: #F5E7CF;
+  color: #674936;
+}
+
+.action-btn.light:hover {
+  background: #EAD2AE;
+}
+
+.note {
+  min-height: 28px;
+  text-align: center;
+  margin-top: 22px;
+  font: italic 23px "Cormorant Garamond", serif;
+}
+
+footer {
+  margin-top: 65px;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: .75;
+}
+
+@media (max-width: 600px) {
+  main { padding: 35px 15px 60px; }
+
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .song-card { height: 285px; }
+
+  .front { padding: 12px 8px; gap: 12px; }
+
+  .ticket-number { font-size: 48px; }
+
+  .ticket-label { font-size: 20px; }
+
+  .back { padding: 22px 8px; gap: 10px; }
+
+  .song-name { font-size: 23px; }
+
+  .tag { font-size: 8px; }
+
+  .listen-link { font-size: 9px; padding: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: .01ms !important;
+    animation: none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<main>
+
+<header>
+  <div class="chapter">
+    Dreamy Music Store · Chapter Five
+  </div>
+
+  <h1>Your Little Melodies</h1>
+
+  <p class="subtitle">
+    Every melody holds a little piece of your story.
+  </p>
+
+  <div class="ornament">✧ ♫ ✧</div>
+</header>
+
+<section class="order" aria-label="Your music order">
+  <div class="order-title">Your Little Order ✧</div>
+
+  <p>The feelings you've tucked into your box:</p>
+
+  <div class="mood-list" id="moodList"></div>
+
+  <div class="order-count" id="orderCount"></div>
+
+  <div class="preview" id="previewNotice"></div>
+</section>
+
+<div class="section-title">
+  ✧ Unwrap your little melodies ✧
+</div>
+
+<section class="cards" id="cards"
+         aria-label="Mystery music cards">
+</section>
+
+<div class="reveal-status" id="revealStatus"
+     role="status">
+  A little melody is waiting to be discovered...
+</div>
+
+<div class="actions">
+  <button class="action-btn light" id="newMix">
+    ✧ Surprise Me Again
+  </button>
+
+  <button class="action-btn" id="keepSongs">
+    Keep These Melodies ♡
+  </button>
+
+  <a class="action-btn light" href="music-box.html">
+    ← Back to My Tickets
+  </a>
+</div>
+
+<div class="note" id="note" role="status"></div>
+
+<footer>
+  Dreamy Music Store · Made of music & daydreams
+</footer>
+
+</main>
+
+<script>
+/* =====================================
+   1. MUSIC LIBRARY
+   Exactly 63 selected YouTube Music tracks.
+   Each row: [Song Title, YouTube Video ID]
+===================================== */
+
+const trackData = [
+  ["Moonlight Romance","_CDTxAsiRMM"],
+  ["From the Start","x-DxfDwWRvw"],
+  ["Flower Day","JIVGidLmlhs"],
+  ["As Time Flies (Special Version)","ARV39__nFKo"],
+  ["Great Fairy Fountain (Soft)","9223Ui33Mkg"],
+  ["Great Fairy Fountain (Original)","O5HGP6yf0GA"],
+  ["Pluto Projector Ending","I5Qy9zququU"],
+  ["This Is What Autumn Feels Like (Piano)","pNPEXQfbOsA"],
+  ["Intro (End of the World) (Extended)","Hofh-VI0KaQ"],
+  ["Mia & Sebastian's Theme (Late Night Ver.)","JCyvVa1xwXc"],
+  ["Mia & Sebastian's Theme","lulmfoic__0"],
+  ["Fragile (Piano)","5JivhkkIhrE"],
+  ["Beanie","CpK-ifQOo3c"],
+  ["Orange Hues","14ij-aEbhdY"],
+  ["Debussy - Arabesque No. 1","k_DI0u8vrr0"],
+  ["Farewell Letter","4kRT0g137i0"],
+  ["Amore Mio Aiutami","ohKN47N6VAg"],
+  ["Rumination","pCr6g8-j_vA"],
+  ["Katawaredoki","mhpRipG9Zss"],
+  ["Theme of Mitsuha","iP6ZABrm8Lo"],
+  ["How Beautiful Is She","DdCbbk9_2K8"],
+  ["영의 왈츠","H39PiFi4UzE"],
+  ["When the Devil Falls in Love","RrO2D_4_KUs"],
+  ["一緒なら","zWW75icDzCE"],
+  ["Mrs Magic x La La Land","yMkjCAs9V40"],
+  ["初恋の人 (Hatsukoino Hito)","QbVb-Y_s5D4"],
+  ["逃向春天","gRDRDmMY_z8"],
+  ["Winter Magic","Sd7yXEXoibk"],
+  ["Ode to Summer","mAi_f2IgT5s"],
+  ["Echoes of Autumn","tYqE4gYGDUM"],
+  ["The Name of Life (Slowed + Reverb)","46uH8WTa8d8"],
+  ["Ditto (Background)","DR2YMO0EroU"],
+  ["NewJeans Ditto Outro","gLCkF4kK45s"],
+  ["Moonlight Romance (Lofi Ver.)","Y7vGZt_Uh_k"],
+  ["They Work as a Team","l9OrxNJCXeQ"],
+  ["22194 (Norman's Theme)","q4ARKcYeslg"],
+  ["Emma's Sorrow","wVi_ZnpuuYE"],
+  ["Isabella's Lullaby","-b8_89vlkaI"],
+  ["Ditto Instrumental","qZGbzi1Lcys"],
+  ["Japan","GW7AYygYrio"],
+  ["Sweet Boy","p9OtySpRRL8"],
+  ["Earrings","BI9HQCzpDgQ"],
+  ["Superpowers","bSe3xemu1LY"],
+  ["To the Moon","O85rwHvF7t4"],
+  ["This Is What Falling in Love Feels Like","cGO6ZwrppDQ"],
+  ["Kill Bill","AdEKgwUqPKI"],
+  ["Magical Fantasy","7aVt4f7MP6Q"],
+  ["Forest Mixtape","gNQfzFTpo7c"],
+  ["On Top","GyJH6UnPfKg"],
+  ["Để Dành Cho Em","3KakOqfMKbk"],
+  ["Xương Rồng","skvHQIt-XyI"],
+  ["Let's Go Picnic","Ba4RrhpLD7Y"],
+  ["Double Take","IYOfGK5Zos4"],
+  ["Time Machine","7ugSL_omvYQ"],
+  ["Blue Lips","SCySL2FKuCc"],
+  ["Wassup","oEow4l7mP7c"],
+  ["NewJeans (Jersey Club Mix)","HPCEW91fts4"],
+  ["Sun Kiss","DWGROwMNFek"],
+  ["This Is What Autumn Feels Like","atM2LtvaYNU"],
+  ["F.L.Y (1991)","A-8fdRq2W9w"],
+  ["vaicaunoicokhiennguoithaydoi","CBtQ1QJbQYE"],
+  ["Em Đây Chẳng Phải Thúy Kiều","VaOj6ZTdPxk"],
+  ["Thank U, Next","GftZ601-pXs"]
+];
+
+const library = trackData.map((row, index) => ({
+  id: index + 1,
+  title: row[0],
+  link: "https://music.youtube.com/watch?v=" + row[1]
+}));
+
+/* =====================================
+   2. OFFICIAL MOOD CLASSIFICATIONS
+   Based on the user's finalized choices.
+   A song can belong to multiple moods.
+===================================== */
+
+const moodSets = {
+  "Dreamy": [
+    1,2,3,4,5,6,8,9,12,14,15,17,21,22,
+    28,30,31,32,33,34,39,47,48,49,53,54
+  ],
+
+  "Nostalgia": [
+    1,4,5,6,7,9,17,31,32,33,34,39,45,49,60
+  ],
+
+  "Romantic": [
+    1,2,3,4,5,6,7,8,9,10,11,12,14,15,
+    16,17,18,19,20,21,22,23,24,25,26,
+    27,28,29,30,31,32,33,34,38,39,41,
+    42,43,44,45,50,51,52,53,54,58,59,61
+  ],
+
+  "Relax": [
+    2,5,7,9,12,13,14,15,17,25,29,32,33,49,61
+  ],
+
+  "Happiness": [
+    1,2,3,4,5,6,9,10,11,12,15,17,21,22,
+    28,30,35,38,40,41,42,43,44,45,46,
+    47,50,52,53,55,56,57,58,59,60,62,63
+  ],
+
+  "Soft": [
+    2,4,5,6,7,8,9,10,11,12,13,14,15,16,
+    17,18,19,20,25,29,30,31,32,33,34,
+    37,38,39,43,45,46,48,49,50,51,52,
+    53,54,55,61,62
+  ],
+
+  "Instrumental": [
+    1,2,3,4,5,6,7,8,10,11,12,13,14,15,
+    16,17,18,19,20,21,22,23,24,25,26,
+    27,28,29,30,31,32,33,34,35,36,37,
+    38,39,40,47,48,49,57
+  ],
+
+  "Classical": [10,11,15,23],
+
+  "Sad": [
+    13,14,16,19,20,24,25,31,32,33,
+    36,37,51,55,61,62
+  ],
+
+  "Low Cortisol": [
+    5,7,12,15,31,32,43,49,61
+  ],
+
+  "Background": [
+    2,5,6,12,17,25,31,32,33,48,49
+  ]
+};
+
+/* =====================================
+   3. READ USER'S PREVIOUS CHOICES
+===================================== */
+
+function readStorage(key) {
+  try {
+    return localStorage.getItem(key);
+  } catch (error) {
+    return null;
+  }
+}
+
+function writeStorage(key, value) {
+  try {
+    localStorage.setItem(key, value);
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+function readJSON(key, fallback) {
+  try {
+    const value = readStorage(key);
+    return value === null ? fallback : JSON.parse(value);
+  } catch (error) {
+    return fallback;
+  }
+}
+
+const savedMoods = readJSON(
+  "dreamySelectedFeelings", []
+);
+
+const validMoods = Array.isArray(savedMoods)
+  ? [...new Set(savedMoods.filter(
+      mood => Object.hasOwn(moodSets, mood)
+    ))]
+  : [];
+
+const previewMode = validMoods.length === 0;
+
+// Default selections for testing the page alone.
+const selectedMoods = previewMode
+  ? ["Dreamy"]
+  : validMoods;
+
+const savedTickets = readJSON(
+  "dreamyMelodyTickets", []
+);
+
+const savedCount = Number(
+  readStorage("dreamySongCount")
+);
+
+let songCount = 3;
+
+if (
+  Number.isInteger(savedCount) &&
+  savedCount >= 1 && savedCount <= 5
+) {
+  songCount = savedCount;
+} else if (
+  Array.isArray(savedTickets) &&
+  savedTickets.length >= 1 &&
+  savedTickets.length <= 5
+) {
+  songCount = savedTickets.length;
+}
+
+const signature = JSON.stringify({
+  moods: selectedMoods,
+  count: songCount
+});
+
+/* =====================================
+   4. MUSIC RECOMMENDATION SYSTEM
+===================================== */
+
+// Count how many requested moods each song matches.
+function scoreSong(song) {
+  return selectedMoods.filter(
+    mood => moodSets[mood].includes(song.id)
+  ).length;
+}
+
+// Pick a song randomly, giving a greater chance
+// to songs that match more requested moods.
+function takeWeightedSong(pool) {
+  const weights = pool.map(song =>
+    Math.pow(3, song.score)
+  );
+
+  const total = weights.reduce(
+    (sum, weight) => sum + weight, 0
+  );
+
+  let random = Math.random() * total;
+
+  for (let i = 0; i < pool.length; i++) {
+    random -= weights[i];
+
+    if (random < 0) {
+      return pool.splice(i, 1)[0];
+    }
+  }
+
+  return pool.pop();
+}
+
+// Generate a collection with no repeated songs.
+function generateCollection() {
+  const matching = [];
+  const surprises = [];
+
+  library.forEach(song => {
+    const candidate = {
+      ...song,
+      score: scoreSong(song)
+    };
+
+    if (candidate.score > 0) {
+      matching.push(candidate);
+    } else {
+      surprises.push(candidate);
+    }
+  });
+
+  const result = [];
+
+  while (result.length < songCount) {
+    const pool = matching.length
+      ? matching
+      : surprises;
+
+    if (pool.length === 0) break;
+
+    result.push(takeWeightedSong(pool));
+  }
+
+  return result;
+}
+
+/* =====================================
+   5. DISPLAY THE MUSIC CARDS
+===================================== */
+
+const cards = document.getElementById("cards");
+const moodList = document.getElementById("moodList");
+const orderCount = document.getElementById("orderCount");
+const previewNotice =
+  document.getElementById("previewNotice");
+
+const revealStatus =
+  document.getElementById("revealStatus");
+
+const note = document.getElementById("note");
+const newMix = document.getElementById("newMix");
+const keepSongs = document.getElementById("keepSongs");
+
+const roman = ["I", "II", "III", "IV", "V"];
+
+let currentSongs = [];
+let revealedCount = 0;
+
+function escapeHTML(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+// Show the moods collected in Chapter Three.
+function renderOrder() {
+  moodList.innerHTML = "";
+
+  selectedMoods.forEach(mood => {
+    const tag = document.createElement("span");
+    tag.className = "mood";
+    tag.textContent = "✧ " + mood;
+    moodList.appendChild(tag);
+  });
+
+  orderCount.textContent =
+    songCount + (songCount === 1
+      ? " melody requested"
+      : " melodies requested");
+
+  if (previewMode) {
+    previewNotice.textContent =
+      "Preview mode: no saved feelings were found. " +
+      "Using Dreamy as a sample mood.";
+  }
+}
+
+function saveCurrentCollection() {
+  writeStorage(
+    "dreamyRecommendedSongs",
+    JSON.stringify(currentSongs.map(song => song.id))
+  );
+
+  writeStorage(
+    "dreamyRecommendationSignature",
+    signature
+  );
+}
+
+function renderCards() {
+  cards.innerHTML = "";
+  revealedCount = 0;
+
+  revealStatus.textContent =
+    "Click a sealed card to reveal its melody. ✧";
+
+  currentSongs.forEach((song, index) => {
+    const matches = selectedMoods.filter(mood =>
+      moodSets[mood].includes(song.id)
+    );
+
+    const moodHTML = matches.length
+      ? matches.map(mood =>
+          `<span class="tag">${escapeHTML(mood)}</span>`
+        ).join("")
+      : `<span class="tag">A little surprise ✧</span>`;
+
+    const card = document.createElement("article");
+    card.className = "song-card";
+
+    card.innerHTML = `
+      <div class="card-inner">
+
+        <button class="card-face front"
+                type="button"
+                aria-label="Reveal melody ${index + 1}">
+          <span class="ticket-symbol">✧</span>
+          <span class="ticket-number">${roman[index]}</span>
+          <span class="ticket-label">A little mystery</span>
+          <span class="wax-seal">♫</span>
+          <span class="ticket-note">
+            Dreamy Music Store<br>
+            Click to unwrap
+          </span>
+        </button>
+
+        <div class="card-face back">
+          <div class="back-label">
+            ✧ Melody ${index + 1} ✧
+          </div>
+
+          <div class="ornament" style="
+            color:#AC8B64;
+            margin:0;
+            font-size:24px
+          ">♫</div>
+
+          <h2 class="song-name">
+            ${escapeHTML(song.title)}
+          </h2>
+
+          <div class="tags">
+            ${moodHTML}
+          </div>
+
+          <a class="listen-link"
+             href="${song.link}"
+             target="_blank"
+             rel="noopener noreferrer"
+             tabindex="-1">
+            Listen on YouTube Music ↗
+          </a>
+        </div>
+
+      </div>
+    `;
+
+    const front = card.querySelector(".front");
+    const listen = card.querySelector(".listen-link");
+
+    front.addEventListener("click", () => {
+      if (card.classList.contains("opened")) return;
+
+      card.classList.add("opened");
+      front.tabIndex = -1;
+      listen.tabIndex = 0;
+      revealedCount++;
+
+      revealStatus.textContent =
+        `${revealedCount} / ${currentSongs.length} ` +
+        "melodies discovered ✧";
+
+      if (revealedCount === currentSongs.length) {
+        revealStatus.textContent =
+          "Every little melody has been discovered. ♡";
+      }
+    });
+
+    cards.appendChild(card);
+  });
+}
+
+function startCollection(forceNew = false) {
+  const savedIDs = readJSON(
+    "dreamyRecommendedSongs", []
+  );
+
+  const savedSignature = readStorage(
+    "dreamyRecommendationSignature"
+  );
+
+  const validSaved =
+    Array.isArray(savedIDs) &&
+    savedIDs.length === songCount &&
+    new Set(savedIDs).size === songCount &&
+    savedIDs.every(id =>
+      Number.isInteger(id) &&
+      id >= 1 && id <= library.length
+    );
+
+  if (
+    !forceNew &&
+    validSaved &&
+    savedSignature === signature
+  ) {
+    currentSongs = savedIDs.map(id => ({
+      ...library[id - 1],
+      score: scoreSong(library[id - 1])
+    }));
+  } else {
+    currentSongs = generateCollection();
+  }
+
+  saveCurrentCollection();
+  renderCards();
+
+  note.textContent = "";
+}
+
+// Generate another mystery collection.
+newMix.addEventListener("click", () => {
+  startCollection(true);
+
+  note.textContent =
+    "A fresh collection of melodies awaits you. ✧";
+});
+
+// Store songs for the upcoming playlist chapter.
+keepSongs.addEventListener("click", () => {
+  const saved = writeStorage(
+    "dreamyPlaylistDraft",
+    JSON.stringify(currentSongs.map(song => song.id))
+  );
+
+  note.textContent = saved
+    ? "Your melodies have been saved for your playlist. ♡"
+    : "Your browser could not save this collection.";
+});
+
+// Initialize.
+renderOrder();
+startCollection();
+</script>
+
+</body>
+</html>
