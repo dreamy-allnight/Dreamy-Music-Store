@@ -1,0 +1,1480 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>My Little Playlist | Dreamy Music Store</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cream: #F9EEDA;
+  --paper: #F5E8D0;
+  --ink: #604633;
+  --wood: #76513D;
+  --gold: #C9A678;
+  --rose: #C79793;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: "DM Sans", sans-serif;
+  background:
+    radial-gradient(
+      ellipse at 50% 10%,
+      #E8CFAC, transparent 65%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      #FFFFFF07 0 3px,
+      #00000004 3px 6px
+    ),
+    linear-gradient(140deg, #C5A58B, #98745C);
+}
+
+/* DECORATIVE BACKGROUND */
+
+.background-note {
+  position: fixed;
+  z-index: 0;
+  color: #F6E5CD;
+  opacity: .27;
+  pointer-events: none;
+  font-size: 35px;
+}
+
+.background-note.one {
+  top: 17%;
+  left: 5%;
+}
+
+.background-note.two {
+  top: 42%;
+  right: 5%;
+}
+
+.background-note.three {
+  bottom: 10%;
+  left: 8%;
+}
+
+/* LAYOUT */
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: auto;
+  padding: 48px 20px 80px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.chapter {
+  color: #74543F;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 11px;
+}
+
+h1 {
+  margin: 15px 0 10px;
+  font: 500 clamp(52px, 8vw, 90px)
+    "Cormorant Garamond", serif;
+  color: #FFF5E7;
+  text-shadow: 0 5px 20px #513B2B40;
+}
+
+.subtitle {
+  font: italic 27px
+    "Cormorant Garamond", serif;
+  color: #614533;
+}
+
+.ornament {
+  margin-top: 23px;
+  font-size: 24px;
+  color: #FFF0D8;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 325px;
+  gap: 26px;
+  align-items: start;
+}
+
+/* VINTAGE PLAYLIST PAPER */
+
+.paper {
+  position: relative;
+  background:
+    radial-gradient(
+      circle at 15% 8%,
+      #FFF9EA, transparent 55%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 5px,
+      #A7864A07 5px 6px
+    ),
+    linear-gradient(#F8EBD5, #EAD6B6);
+  border: 2px solid #D2B38D;
+  border-radius: 7px;
+  padding: 43px 42px 35px;
+  box-shadow:
+    0 0 0 6px #F4E4C488,
+    0 25px 55px #412A1B44;
+}
+
+.paper::before {
+  content: "";
+  position: absolute;
+  inset: 13px;
+  border: 1px solid #C5A47A66;
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.tape {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 125px;
+  height: 33px;
+  background: #EBD3ADCC;
+  box-shadow: 0 3px 5px #51382922;
+  clip-path: polygon(
+    0 4%, 100% 0, 96% 100%, 3% 95%
+  );
+}
+
+.paper-heading {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.paper-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #9E7C5A;
+}
+
+.paper-heading h2 {
+  font: 500 49px
+    "Cormorant Garamond", serif;
+  margin: 12px 0 7px;
+}
+
+.paper-heading p {
+  font: italic 21px
+    "Cormorant Garamond", serif;
+  margin: 0;
+  color: #926E50;
+}
+
+/* PLAYLIST NAME */
+
+.name-label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #947052;
+}
+
+.playlist-name {
+  width: 100%;
+  padding: 13px 15px;
+  outline: none;
+  border: 1px solid #D2B48E;
+  border-radius: 5px;
+  background: #FFF7E9AA;
+  color: #674835;
+  font: italic 29px
+    "Cormorant Garamond", serif;
+  text-align: center;
+  transition: border-color .2s;
+}
+
+.playlist-name:focus {
+  border-color: #9B7150;
+  box-shadow: 0 0 0 3px #C9A67944;
+}
+
+.track-heading {
+  margin: 30px 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid #C5A47B88;
+  padding-bottom: 12px;
+}
+
+.track-heading span:first-child {
+  font: italic 26px
+    "Cormorant Garamond", serif;
+}
+
+.track-count {
+  font-size: 11px;
+  color: #9D7655;
+  letter-spacing: 1px;
+}
+
+/* TRACK ROWS */
+
+.track-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 12px;
+  background: #FFF8EA88;
+  border: 1px solid #DEC7A4;
+  border-radius: 6px;
+  transition: background .2s, transform .2s;
+  animation: appear .45s ease both;
+}
+
+.track:hover {
+  background: #FFF9EE;
+  transform: translateX(3px);
+}
+
+.track-index {
+  font: 500 26px
+    "Cormorant Garamond", serif;
+  color: #9B7656;
+  min-width: 23px;
+  text-align: center;
+}
+
+.mini-record {
+  position: relative;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background:
+    repeating-radial-gradient(
+      circle,
+      #34302B 0 2px,
+      #22201E 2px 4px
+    );
+  display: grid;
+  place-items: center;
+  box-shadow: 2px 4px 8px #38291D44;
+}
+
+.mini-record::after {
+  content: "♫";
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #CB9B86;
+  color: #FFF3E1;
+  font-size: 10px;
+}
+
+.track-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.track-title {
+  font: 600 23px/1.05
+    "Cormorant Garamond", serif;
+  overflow-wrap: anywhere;
+}
+
+.track-caption {
+  margin-top: 6px;
+  font-size: 9px;
+  color: #9E7859;
+  letter-spacing: 1px;
+}
+
+.track-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.icon-btn {
+  border: 1px solid #D6BA94;
+  border-radius: 4px;
+  background: #F1DFBF;
+  color: #735039;
+  width: 30px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background .2s;
+}
+
+.icon-btn:hover:not(:disabled) {
+  background: #D9BB91;
+}
+
+.icon-btn:disabled {
+  opacity: .25;
+  cursor: default;
+}
+
+.icon-btn.delete {
+  color: #A16D64;
+}
+
+.empty {
+  text-align: center;
+  padding: 30px 15px;
+  font: italic 23px
+    "Cormorant Garamond", serif;
+  color: #997658;
+}
+
+.paper-footer {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #C6A67E;
+  text-align: center;
+  font: italic 22px
+    "Cormorant Garamond", serif;
+  color: #967354;
+}
+
+/* WOODEN SIDEBAR */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.wood-box {
+  border: 9px solid #533825;
+  padding: 25px 18px;
+  border-radius: 11px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #FFFFFF07 0 5px,
+      #00000005 5px 12px
+    ),
+    linear-gradient(135deg, #A67C59, #75503A);
+  color: #F9EDD9;
+  text-align: center;
+  box-shadow:
+    0 15px 35px #49302355,
+    inset 0 0 30px #39231855;
+}
+
+.wood-label {
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #E9CEAA;
+}
+
+.vinyl {
+  width: 140px;
+  height: 140px;
+  margin: 23px auto;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  box-shadow: 5px 9px 15px #291A1355;
+  background:
+    repeating-radial-gradient(
+      circle,
+      #2F2B2B 0 3px,
+      #22201F 3px 6px
+    );
+  animation: spin 16s linear infinite;
+}
+
+.vinyl-center {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #C88F87;
+  border: 5px solid #A46B66;
+  color: #FFF0D9;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+}
+
+.wood-box h3 {
+  font: 500 34px
+    "Cormorant Garamond", serif;
+  margin: 5px 0 8px;
+}
+
+.wood-box p {
+  font: italic 20px/1.4
+    "Cormorant Garamond", serif;
+  color: #EBD6BE;
+}
+
+.moods {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px;
+  margin: 20px 0;
+}
+
+.mood {
+  padding: 6px 10px;
+  border: 1px solid #E1C39B88;
+  border-radius: 20px;
+  font-size: 10px;
+  color: #FCEBD6;
+  background: #4D352A66;
+}
+
+/* BUTTONS */
+
+.btn {
+  width: 100%;
+  border: 1px solid #D3B188;
+  padding: 13px 16px;
+  margin-top: 10px;
+  border-radius: 5px;
+  background: #F4E4CA;
+  color: #664630;
+  font: 600 11px "DM Sans", sans-serif;
+  letter-spacing: .5px;
+  cursor: pointer;
+  transition: transform .2s, background .2s;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: #E3CAA6;
+}
+
+.btn.primary {
+  background: #654433;
+  color: #FFF0DB;
+}
+
+.btn.primary:hover:not(:disabled) {
+  background: #876147;
+}
+
+.btn:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+.status {
+  min-height: 25px;
+  font: italic 19px/1.3
+    "Cormorant Garamond", serif;
+  color: #F6E5CC;
+  margin-top: 15px;
+}
+
+.help {
+  font-size: 10px !important;
+  line-height: 1.6 !important;
+  letter-spacing: .2px;
+}
+
+/* SAVED PLAYLIST SHELF */
+
+.saved-section {
+  margin-top: 55px;
+  padding: 30px;
+  background: #5C403255;
+  border: 1px solid #E3CAAB66;
+  border-radius: 12px;
+}
+
+.saved-section h2 {
+  margin: 0 0 8px;
+  font: 500 47px
+    "Cormorant Garamond", serif;
+  color: #FFF0D8;
+}
+
+.saved-subtitle {
+  margin: 0 0 23px;
+  font: italic 22px
+    "Cormorant Garamond", serif;
+  color: #F1D9C0;
+}
+
+.saved-list {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit, minmax(min(100%, 250px), 1fr)
+  );
+  gap: 14px;
+}
+
+.saved-card {
+  padding: 22px;
+  border: 1px solid #D5B48C;
+  border-radius: 7px;
+  background: #F5E6CB;
+  color: #634633;
+}
+
+.saved-card h3 {
+  font: 600 29px
+    "Cormorant Garamond", serif;
+  margin: 8px 0;
+  overflow-wrap: anywhere;
+}
+
+.saved-card p {
+  font: italic 19px
+    "Cormorant Garamond", serif;
+  color: #8D6B50;
+}
+
+.saved-card .btn {
+  margin-top: 9px;
+}
+
+.saved-empty {
+  font: italic 22px
+    "Cormorant Garamond", serif;
+  color: #F3DDC1;
+}
+
+.preview-message {
+  text-align: center;
+  padding: 13px;
+  margin-bottom: 24px;
+  color: #694936;
+  background: #F8ECD4;
+  border: 1px solid #D5B48B;
+  border-radius: 7px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+footer {
+  margin-top: 60px;
+  text-align: center;
+  color: #F6E7D1;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* ANIMATIONS */
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 850px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    max-width: 550px;
+    width: 100%;
+    margin: auto;
+  }
+}
+
+@media (max-width: 550px) {
+  .container {
+    padding: 32px 12px 60px;
+  }
+
+  .paper {
+    padding: 40px 22px 28px;
+  }
+
+  .paper-heading h2 {
+    font-size: 40px;
+  }
+
+  .track {
+    gap: 8px;
+    padding: 12px 7px;
+  }
+
+  .track-title {
+    font-size: 20px;
+  }
+
+  .mini-record {
+    width: 34px;
+    height: 34px;
+  }
+
+  .mini-record::after {
+    width: 15px;
+    height: 15px;
+  }
+
+  .track-index {
+    min-width: 15px;
+    font-size: 21px;
+  }
+
+  .icon-btn {
+    width: 27px;
+    height: 29px;
+    font-size: 13px;
+  }
+
+  .track-actions {
+    gap: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background-note one" aria-hidden="true">✧</div>
+<div class="background-note two" aria-hidden="true">♫</div>
+<div class="background-note three" aria-hidden="true">✦</div>
+
+<main class="container">
+
+<header>
+  <div class="chapter">
+    Dreamy Music Store · Chapter Six
+  </div>
+
+  <h1>Take Your Melodies Home</h1>
+
+  <p class="subtitle">
+    Some melodies are too lovely to leave behind.
+  </p>
+
+  <div class="ornament">✧ ♫ ✧</div>
+</header>
+
+<div class="preview-message"
+     id="previewMessage"
+     hidden></div>
+
+<div class="layout">
+
+  <!-- PLAYLIST PAPER -->
+
+  <section class="paper">
+
+    <div class="tape" aria-hidden="true"></div>
+
+    <div class="paper-heading">
+      <div class="paper-label">
+        ✧ A Little Souvenir ✧
+      </div>
+
+      <h2>Your Personal Playlist</h2>
+
+      <p>
+        A collection of melodies, made just for you.
+      </p>
+    </div>
+
+    <label class="name-label"
+           for="playlistName">
+      Give your collection a name
+    </label>
+
+    <input
+      id="playlistName"
+      class="playlist-name"
+      type="text"
+      maxlength="60"
+      value="My Little Daydream"
+      placeholder="A name for your memories">
+
+    <div class="track-heading">
+      <span>My Little Tracklist</span>
+      <span class="track-count"
+            id="trackCount"></span>
+    </div>
+
+    <div class="track-list"
+         id="trackList"></div>
+
+    <div class="paper-footer">
+      ✧ May these melodies stay with you. ✧
+    </div>
+
+  </section>
+
+  <!-- MUSIC BOX SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <section class="wood-box">
+
+      <div class="wood-label">
+        Dreamy Music Store
+      </div>
+
+      <div class="vinyl" aria-hidden="true">
+        <div class="vinyl-center">♫</div>
+      </div>
+
+      <h3>A Little Memory Box</h3>
+
+      <p>
+        The melodies you've collected
+        are ready to find a home.
+      </p>
+
+      <div class="moods" id="moods"></div>
+
+      <button class="btn" id="saveButton">
+        ♡ Save My Playlist
+      </button>
+
+      <button class="btn" id="copyButton">
+        ✧ Copy My Track Links
+      </button>
+
+      <button class="btn" id="resetButton">
+        ↺ Use My Melody Cards
+      </button>
+
+      <a class="btn primary"
+         href="songs.html">
+        ← Back to My Melodies
+      </a>
+
+      <p class="help">
+        Your playlists are saved in this
+        browser. Copy the links to keep
+        a separate record.
+      </p>
+
+      <div class="status"
+           id="status"
+           role="status"></div>
+
+    </section>
+
+  </aside>
+</div>
+
+<!-- SAVED PLAYLISTS -->
+
+<section class="saved-section">
+
+  <h2>My Little Playlist Shelf</h2>
+
+  <p class="saved-subtitle">
+    A cozy corner for the melodies
+    you've decided to keep.
+  </p>
+
+  <div class="saved-list"
+       id="savedList"></div>
+
+</section>
+
+<footer>
+  Dreamy Music Store · Made of music & daydreams
+</footer>
+
+</main>
+
+<script>
+/* =======================================
+   1. MUSIC LIBRARY
+   Same 63 tracks used in songs.html
+======================================= */
+
+const trackData = [
+  ["Moonlight Romance","_CDTxAsiRMM"],
+  ["From the Start","x-DxfDwWRvw"],
+  ["Flower Day","JIVGidLmlhs"],
+  ["As Time Flies (Special Version)","ARV39__nFKo"],
+  ["Great Fairy Fountain (Soft)","9223Ui33Mkg"],
+  ["Great Fairy Fountain (Original)","O5HGP6yf0GA"],
+  ["Pluto Projector Ending","I5Qy9zququU"],
+  ["This Is What Autumn Feels Like (Piano)","pNPEXQfbOsA"],
+  ["Intro (End of the World) (Extended)","Hofh-VI0KaQ"],
+  ["Mia & Sebastian's Theme (Late Night Ver.)","JCyvVa1xwXc"],
+  ["Mia & Sebastian's Theme","lulmfoic__0"],
+  ["Fragile (Piano)","5JivhkkIhrE"],
+  ["Beanie","CpK-ifQOo3c"],
+  ["Orange Hues","14ij-aEbhdY"],
+  ["Debussy - Arabesque No. 1","k_DI0u8vrr0"],
+  ["Farewell Letter","4kRT0g137i0"],
+  ["Amore Mio Aiutami","ohKN47N6VAg"],
+  ["Rumination","pCr6g8-j_vA"],
+  ["Katawaredoki","mhpRipG9Zss"],
+  ["Theme of Mitsuha","iP6ZABrm8Lo"],
+  ["How Beautiful Is She","DdCbbk9_2K8"],
+  ["영의 왈츠","H39PiFi4UzE"],
+  ["When the Devil Falls in Love","RrO2D_4_KUs"],
+  ["一緒なら","zWW75icDzCE"],
+  ["Mrs Magic x La La Land","yMkjCAs9V40"],
+  ["初恋の人 (Hatsukoino Hito)","QbVb-Y_s5D4"],
+  ["逃向春天","gRDRDmMY_z8"],
+  ["Winter Magic","Sd7yXEXoibk"],
+  ["Ode to Summer","mAi_f2IgT5s"],
+  ["Echoes of Autumn","tYqE4gYGDUM"],
+  ["The Name of Life (Slowed + Reverb)","46uH8WTa8d8"],
+  ["Ditto (Background)","DR2YMO0EroU"],
+  ["NewJeans Ditto Outro","gLCkF4kK45s"],
+  ["Moonlight Romance (Lofi Ver.)","Y7vGZt_Uh_k"],
+  ["They Work as a Team","l9OrxNJCXeQ"],
+  ["22194 (Norman's Theme)","q4ARKcYeslg"],
+  ["Emma's Sorrow","wVi_ZnpuuYE"],
+  ["Isabella's Lullaby","-b8_89vlkaI"],
+  ["Ditto Instrumental","qZGbzi1Lcys"],
+  ["Japan","GW7AYygYrio"],
+  ["Sweet Boy","p9OtySpRRL8"],
+  ["Earrings","BI9HQCzpDgQ"],
+  ["Superpowers","bSe3xemu1LY"],
+  ["To the Moon","O85rwHvF7t4"],
+  ["This Is What Falling in Love Feels Like","cGO6ZwrppDQ"],
+  ["Kill Bill","AdEKgwUqPKI"],
+  ["Magical Fantasy","7aVt4f7MP6Q"],
+  ["Forest Mixtape","gNQfzFTpo7c"],
+  ["On Top","GyJH6UnPfKg"],
+  ["Để Dành Cho Em","3KakOqfMKbk"],
+  ["Xương Rồng","skvHQIt-XyI"],
+  ["Let's Go Picnic","Ba4RrhpLD7Y"],
+  ["Double Take","IYOfGK5Zos4"],
+  ["Time Machine","7ugSL_omvYQ"],
+  ["Blue Lips","SCySL2FKuCc"],
+  ["Wassup","oEow4l7mP7c"],
+  ["NewJeans (Jersey Club Mix)","HPCEW91fts4"],
+  ["Sun Kiss","DWGROwMNFek"],
+  ["This Is What Autumn Feels Like","atM2LtvaYNU"],
+  ["F.L.Y (1991)","A-8fdRq2W9w"],
+  ["vaicaunoicokhiennguoithaydoi","CBtQ1QJbQYE"],
+  ["Em Đây Chẳng Phải Thúy Kiều","VaOj6ZTdPxk"],
+  ["Thank U, Next","GftZ601-pXs"]
+];
+
+const library = trackData.map((row, index) => ({
+  id: index + 1,
+  title: row[0],
+  url: "https://music.youtube.com/watch?v=" + row[1]
+}));
+
+/* =======================================
+   2. STORAGE HELPERS
+======================================= */
+
+function readStorage(key) {
+  try {
+    return localStorage.getItem(key);
+  } catch (error) {
+    return null;
+  }
+}
+
+function writeStorage(key, value) {
+  try {
+    localStorage.setItem(key, value);
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+function readJSON(key, fallback) {
+  try {
+    const value = readStorage(key);
+    return value === null ? fallback : JSON.parse(value);
+  } catch (error) {
+    return fallback;
+  }
+}
+
+function validIDs(list) {
+  if (!Array.isArray(list)) return [];
+
+  return [...new Set(
+    list.filter(id =>
+      Number.isInteger(id) &&
+      id >= 1 &&
+      id <= library.length
+    )
+  )].slice(0, 5);
+}
+
+/* =======================================
+   3. LOAD THE MELODIES
+======================================= */
+
+const originalDraft = validIDs(
+  readJSON("dreamyPlaylistDraft", [])
+);
+
+const lastCollection = validIDs(
+  readJSON("dreamyRecommendedSongs", [])
+);
+
+let previewMode = false;
+let playlistIDs = [];
+let activeSavedId = null;
+
+if (originalDraft.length > 0) {
+  playlistIDs = [...originalDraft];
+
+} else if (lastCollection.length > 0) {
+  playlistIDs = [...lastCollection];
+
+} else {
+  // Example songs when opening this file alone.
+  playlistIDs = [1, 15, 19];
+  previewMode = true;
+}
+
+let savedPlaylists = readJSON("dreamyPlaylists", []);
+
+if (!Array.isArray(savedPlaylists)) {
+  savedPlaylists = [];
+}
+
+savedPlaylists = savedPlaylists.filter(
+  item =>
+    item &&
+    typeof item.id === "string" &&
+    typeof item.name === "string" &&
+    Array.isArray(item.tracks)
+);
+
+const knownMoods = [
+  "Dreamy", "Nostalgia", "Romantic",
+  "Relax", "Happiness", "Soft",
+  "Instrumental", "Classical", "Sad",
+  "Low Cortisol", "Background"
+];
+
+const storedMoods = readJSON(
+  "dreamySelectedFeelings", []
+);
+
+const selectedMoods = Array.isArray(storedMoods)
+  ? [...new Set(storedMoods)].filter(
+      mood => knownMoods.includes(mood)
+    )
+  : [];
+
+/* =======================================
+   4. ELEMENTS
+======================================= */
+
+const trackList =
+  document.getElementById("trackList");
+
+const trackCount =
+  document.getElementById("trackCount");
+
+const playlistName =
+  document.getElementById("playlistName");
+
+const savedList =
+  document.getElementById("savedList");
+
+const saveButton =
+  document.getElementById("saveButton");
+
+const copyButton =
+  document.getElementById("copyButton");
+
+const resetButton =
+  document.getElementById("resetButton");
+
+const statusMessage =
+  document.getElementById("status");
+
+const previewMessage =
+  document.getElementById("previewMessage");
+
+const moodsContainer =
+  document.getElementById("moods");
+
+function setStatus(text) {
+  statusMessage.textContent = text;
+}
+
+/* =======================================
+   5. MOOD DECORATIONS
+======================================= */
+
+function renderMoods() {
+  moodsContainer.innerHTML = "";
+
+  if (selectedMoods.length === 0) {
+    const label = document.createElement("span");
+    label.className = "mood";
+    label.textContent = "✧ A handpicked collection";
+    moodsContainer.appendChild(label);
+    return;
+  }
+
+  selectedMoods.forEach(mood => {
+    const tag = document.createElement("span");
+    tag.className = "mood";
+    tag.textContent = "✧ " + mood;
+    moodsContainer.appendChild(tag);
+  });
+}
+
+/* =======================================
+   6. PLAYLIST TRACKS
+======================================= */
+
+function makeButton(text, label, callback) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "icon-btn";
+  button.textContent = text;
+  button.title = label;
+  button.setAttribute("aria-label", label);
+  button.addEventListener("click", callback);
+  return button;
+}
+
+function renderTracks() {
+  trackList.innerHTML = "";
+
+  trackCount.textContent =
+    playlistIDs.length + " / 5 melodies";
+
+  saveButton.disabled = playlistIDs.length === 0;
+  copyButton.disabled = playlistIDs.length === 0;
+
+  if (playlistIDs.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "empty";
+
+    empty.textContent =
+      "Your playlist is empty. " +
+      "Return to your melody cards to begin again.";
+
+    trackList.appendChild(empty);
+    return;
+  }
+
+  playlistIDs.forEach((id, index) => {
+    const song = library[id - 1];
+
+    if (!song) return;
+
+    const row = document.createElement("div");
+    row.className = "track";
+
+    const indexLabel = document.createElement("span");
+    indexLabel.className = "track-index";
+    indexLabel.textContent = String(index + 1)
+      .padStart(2, "0");
+
+    const record = document.createElement("span");
+    record.className = "mini-record";
+    record.setAttribute("aria-hidden", "true");
+
+    const info = document.createElement("div");
+    info.className = "track-info";
+
+    const title = document.createElement("div");
+    title.className = "track-title";
+    title.textContent = song.title;
+
+    const caption = document.createElement("div");
+    caption.className = "track-caption";
+    caption.textContent = "A LITTLE MELODY FOR YOU";
+
+    info.append(title, caption);
+
+    const actions = document.createElement("div");
+    actions.className = "track-actions";
+
+    // Move the track up.
+    const up = makeButton(
+      "↑", "Move this song up", () => {
+        moveTrack(index, -1);
+      }
+    );
+    up.disabled = index === 0;
+
+    // Move the track down.
+    const down = makeButton(
+      "↓", "Move this song down", () => {
+        moveTrack(index, 1);
+      }
+    );
+    down.disabled = index === playlistIDs.length - 1;
+
+    // Open the song on YouTube Music.
+    const listen = document.createElement("a");
+    listen.className = "icon-btn";
+    listen.textContent = "♫";
+    listen.href = song.url;
+    listen.target = "_blank";
+    listen.rel = "noopener noreferrer";
+    listen.title = "Listen on YouTube Music";
+    listen.setAttribute(
+      "aria-label", "Listen to " + song.title
+    );
+
+    // Remove a track from the playlist.
+    const remove = makeButton(
+      "×", "Remove this song", () => {
+        playlistIDs.splice(index, 1);
+        renderTracks();
+        setStatus("A melody was removed from your list.");
+      }
+    );
+    remove.classList.add("delete");
+
+    actions.append(up, down, listen, remove);
+
+    row.append(indexLabel, record, info, actions);
+    trackList.appendChild(row);
+  });
+}
+
+function moveTrack(index, direction) {
+  const nextIndex = index + direction;
+
+  if (
+    nextIndex < 0 ||
+    nextIndex >= playlistIDs.length
+  ) {
+    return;
+  }
+
+  const temp = playlistIDs[index];
+  playlistIDs[index] = playlistIDs[nextIndex];
+  playlistIDs[nextIndex] = temp;
+
+  renderTracks();
+  setStatus("Your track order has been updated. ✧");
+}
+
+/* =======================================
+   7. SAVE A PLAYLIST
+======================================= */
+
+saveButton.addEventListener("click", () => {
+  if (playlistIDs.length === 0) return;
+
+  const name = playlistName.value.trim()
+    || "My Little Daydream";
+
+  playlistName.value = name;
+
+  const now = new Date().toISOString();
+
+  if (activeSavedId !== null) {
+    const existing = savedPlaylists.find(
+      item => item.id === activeSavedId
+    );
+
+    if (existing) {
+      existing.name = name;
+      existing.tracks = [...playlistIDs];
+      existing.savedAt = now;
+    } else {
+      activeSavedId = null;
+    }
+  }
+
+  if (activeSavedId === null) {
+    activeSavedId =
+      Date.now().toString(36) +
+      Math.random().toString(36).slice(2);
+
+    savedPlaylists.unshift({
+      id: activeSavedId,
+      name: name,
+      tracks: [...playlistIDs],
+      savedAt: now
+    });
+  }
+
+  const success = writeStorage(
+    "dreamyPlaylists",
+    JSON.stringify(savedPlaylists)
+  );
+
+  if (success) {
+    setStatus(
+      "Your little playlist has found a home. ♡"
+    );
+    renderSavedPlaylists();
+  } else {
+    setStatus(
+      "This browser could not save your playlist."
+    );
+  }
+});
+
+/* =======================================
+   8. COPY PLAYLIST LINKS
+======================================= */
+
+async function copyText(text) {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch (error) {
+    // Try the fallback below.
+  }
+
+  const field = document.createElement("textarea");
+  field.value = text;
+  field.style.position = "fixed";
+  field.style.opacity = "0";
+
+  document.body.appendChild(field);
+  field.focus();
+  field.select();
+
+  let copied = false;
+
+  try {
+    copied = document.execCommand("copy");
+  } catch (error) {
+    copied = false;
+  }
+
+  field.remove();
+  return copied;
+}
+
+copyButton.addEventListener("click", async () => {
+  const name = playlistName.value.trim()
+    || "My Little Daydream";
+
+  const lines = [
+    "✧ Dreamy Music Store ✧",
+    name,
+    "",
+    ...playlistIDs.map((id, index) => {
+      const song = library[id - 1];
+
+      return (
+        (index + 1) + ". " +
+        song.title + "\n" +
+        song.url
+      );
+    }),
+    "",
+    "Made of music & daydreams ♡"
+  ];
+
+  const result = await copyText(lines.join("\n\n"));
+
+  setStatus(
+    result
+      ? "Your playlist links have been copied! ♡"
+      : "Copying failed. Please try again."
+  );
+});
+
+/* =======================================
+   9. RESTORE MELODY CARDS
+======================================= */
+
+resetButton.addEventListener("click", () => {
+  activeSavedId = null;
+  playlistName.value = "My Little Daydream";
+
+  const latestDraft = validIDs(
+    readJSON("dreamyPlaylistDraft", [])
+  );
+
+  const latestMix = validIDs(
+    readJSON("dreamyRecommendedSongs", [])
+  );
+
+  if (latestDraft.length > 0) {
+    playlistIDs = latestDraft;
+  } else if (latestMix.length > 0) {
+    playlistIDs = latestMix;
+  } else {
+    playlistIDs = [1, 15, 19];
+  }
+
+  renderTracks();
+
+  setStatus(
+    "Your melody cards have returned. ✧"
+  );
+});
+
+/* =======================================
+   10. SAVED PLAYLIST SHELF
+======================================= */
+
+function renderSavedPlaylists() {
+  savedList.innerHTML = "";
+
+  if (savedPlaylists.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "saved-empty";
+
+    empty.textContent =
+      "No playlists have been saved yet. " +
+      "Your little shelf is waiting...";
+
+    savedList.appendChild(empty);
+    return;
+  }
+
+  savedPlaylists.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "saved-card";
+
+    const symbol = document.createElement("div");
+    symbol.textContent = "✧ ♫ ✧";
+    symbol.style.color = "#B08A62";
+
+    const title = document.createElement("h3");
+    title.textContent = item.name;
+
+    const tracks = validIDs(item.tracks);
+
+    const detail = document.createElement("p");
+    detail.textContent =
+      tracks.length +
+      (tracks.length === 1
+        ? " little melody"
+        : " little melodies");
+
+    const open = document.createElement("button");
+    open.className = "btn primary";
+    open.textContent = "Open This Playlist";
+
+    open.addEventListener("click", () => {
+      activeSavedId = item.id;
+      playlistIDs = [...tracks];
+      playlistName.value = item.name;
+
+      renderTracks();
+      setStatus("A little memory has returned. ♡");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+    const remove = document.createElement("button");
+    remove.className = "btn";
+    remove.textContent = "Remove from My Shelf";
+
+    remove.addEventListener("click", () => {
+      const approved = window.confirm(
+        "Remove this saved playlist from your shelf?"
+      );
+
+      if (!approved) return;
+
+      const updated = savedPlaylists.filter(
+        saved => saved.id !== item.id
+      );
+
+      const success = writeStorage(
+        "dreamyPlaylists",
+        JSON.stringify(updated)
+      );
+
+      if (!success) {
+        setStatus("Could not remove this playlist.");
+        return;
+      }
+
+      savedPlaylists = updated;
+
+      if (activeSavedId === item.id) {
+        activeSavedId = null;
+      }
+
+      renderSavedPlaylists();
+      setStatus("The playlist has left your shelf.");
+    });
+
+    card.append(symbol, title, detail, open, remove);
+    savedList.appendChild(card);
+  });
+}
+
+/* =======================================
+   11. INITIALIZE
+======================================= */
+
+if (previewMode) {
+  previewMessage.hidden = false;
+  previewMessage.textContent =
+    "✧ Preview Mode: no saved melody cards were " +
+    "found, so this page is showing three sample " +
+    "songs. Once all pages are connected, your " +
+    "chosen melodies will appear here.";
+}
+
+renderMoods();
+renderTracks();
+renderSavedPlaylists();
+
+</script>
+
+</body>
+</html>
